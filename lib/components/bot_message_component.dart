@@ -18,13 +18,13 @@ class _BotMessageComponent extends State<BotMessageComponent> {
         children: [
           Container(
             width: 300,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(24),
                 topRight: Radius.circular(24),
                 bottomRight: Radius.circular(24),
               ),
-              color: Colors.grey[600],
+              color: Colors.white,
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -32,7 +32,7 @@ class _BotMessageComponent extends State<BotMessageComponent> {
                 textAlign: TextAlign.start,
                 softWrap: true,
                 overflow: TextOverflow.visible,
-                widget.message,
+                widget.message.replaceAll("\n", ""),
               ),
             ),
           )

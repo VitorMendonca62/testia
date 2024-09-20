@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class InputMessageComponent extends StatefulWidget {
-  final Function(String message) sendMessage;
+  final Function(String message, String type) sendMessage;
+  final void Function() scrollToEnd;
 
   const InputMessageComponent({
     super.key,
     required this.sendMessage,
+    required this.scrollToEnd,
   });
 
   @override
@@ -23,8 +25,9 @@ class _InputMessageComponent extends State<InputMessageComponent> {
 
   _sendMessage(String value) {
     if (value.isNotEmpty) {
+      widget.scrollToEnd();
       inputController.clear();
-      widget.sendMessage(value);
+      widget.sendMessage(value, "me");
     }
   }
 

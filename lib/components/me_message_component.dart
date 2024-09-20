@@ -24,7 +24,7 @@ class _MeMessageComponent extends State<MeMessageComponent> {
                 topLeft: Radius.circular(24),
                 bottomRight: Radius.circular(24),
               ),
-              color: Colors.green[800],
+              color: Colors.green[200],
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
