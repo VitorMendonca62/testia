@@ -34,7 +34,7 @@ class _ChatViewState extends State<ChatView> {
     print("OI");
     _scrollController.animateTo(
       _scrollController.position.extentTotal + 40,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
   }
