@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testia/components/input_message_component.dart';
 import 'package:testia/components/messages_component.dart';
-import 'package:testia/services/gemini.service.dart';
+import 'package:testia/services/olama.service.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({super.key});
@@ -13,14 +13,14 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
   RxList<List<String>> messages = <List<String>>[].obs;
-  GeminiService geminiService = Get.put(GeminiService());
+  OllamaService ollamaService = Get.put(OllamaService());
   final ScrollController _scrollController = ScrollController();
 
   sendMessage(String message, String type) async {
     messages.add([type, message]);
     await _scrollToEnd();
 
-    final response = await geminiService.getResponse(message);
+    final response = await ollamaService.getResponse(message);
 
     if (response == null) {
       messages.add(["bot", "Algo deu errado na resposta, tente novamente!1"]);
@@ -31,7 +31,6 @@ class _ChatViewState extends State<ChatView> {
   }
 
   _scrollToEnd() async {
-    print("OI");
     _scrollController.animateTo(
       _scrollController.position.extentTotal + 40,
       duration: const Duration(milliseconds: 500),

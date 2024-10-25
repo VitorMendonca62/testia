@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:testia/services/gemini.service.dart';
+import 'package:testia/services/olama.service.dart';
 import 'package:testia/views/chat_view.dart';
 
 void main() async {
@@ -13,11 +13,11 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  GeminiService geminiService = Get.put(GeminiService());
+  OllamaService ollamaService = Get.put(OllamaService());
 
   @override
   Widget build(BuildContext context) {
-    geminiService.init();
+    ollamaService.init();
     return const MaterialApp(
       title: 'Teste de ia',
       home: ChatView(),
