@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 class PdfService {
   Future<List<int>?> _readDocumentAssets() async {
     final ByteData data = await rootBundle.load("assets/text-matricula.pdf");
-    print(data);
     return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
   }
 

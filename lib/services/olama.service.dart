@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:ollama/ollama.dart';
 import 'package:testia/services/pdf.service.dart';
+import 'package:fllama/fllama.dart';
 
 class OllamaService {
   PdfService pdfService = Get.put(PdfService());
@@ -11,24 +12,31 @@ class OllamaService {
   init() async {
     String text = await pdfService.getPdfText();
 
-    messages.add(
-      ChatMessage(
-          role: 'user',
-          content:
-              'Use esse texto como base para as próximas perguntas, ele estará contornado por ###: ### $text ###'),
+    String latestResult = "";
+
+    final request = OpenAiRequest(
+      maxTokens: 256,
+      messages: [
+        Message(Role.system,
+            'Use esse texto como base para as próximas perguntas, ele estará contornado por ###: ### $text ###"'),
+      ],
+      numGpuLayers: 99,
+      frequencyPenalty: 0.0,
+      presencePenalty: 1.1,
+      topP: 1.0,
+      contextSize: 2048,
+      temperature: 0.1,
+      logger: (log) {
+        // ignore: avoid_print
+        print('[llama.cpp] $log');
+      },
+      modelPath: 'llama3.2:1b',
     );
+    fllamaChat(request, (response, done) {
+      latestResult = response;
+    });
 
-    print("#########################");
-    print("Primeiro conteudo");
-    print(messages.first.content);
-    print("#########################");
-
-    final stream = ollama.chat(
-      messages,
-      model: 'llama3.2:1b',
-    );
-
-    stream.listen(stdout.write);
+    print(latestResult);
   }
 
   Future<String?> getResponse(String question) async {
@@ -67,3 +75,4 @@ class OllamaService {
     }
   }
 }
+

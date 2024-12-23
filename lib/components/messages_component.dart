@@ -15,8 +15,8 @@ class MessagesComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return ListView.builder(
+    // messages_component.dart
+    return Obx(() => ListView.builder(
           controller: scrollController,
           itemCount: messages.length,
           itemBuilder: (context, index) {
@@ -26,7 +26,7 @@ class MessagesComponent extends StatelessWidget {
               return MeMessageComponent(message: message.last);
             }
             return BotMessageComponent(message: message.last);
-          });
-    });
+          },
+        ));
   }
 }

@@ -40,13 +40,13 @@ class _ChatViewState extends State<ChatView> {
 
   @override
   Widget build(BuildContext context) {
+    // chat_view.dart
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text("Chat com IA")),
       ),
       body: Column(
         children: [
-          // Text(text),
           Expanded(
             child: MessagesComponent(
               messages: messages,
