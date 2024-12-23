@@ -28,12 +28,6 @@ class GeminiService {
 
     String text = await pdfService.getPdfText();
 
-    print(text);
-
-    // chat = model.startChat(history: [
-    //   Content.text(
-    //       "Use esse texto como base para as próximas perguntas, ele estará contornado por ###: ### $text ###"),
-    // ]);
 
     chat = model.startChat(history: [
       Content.text(
@@ -46,11 +40,8 @@ class GeminiService {
       var content = Content.text(
           "Elabore uma resposta para a seguinte pergunta: '$question', você também pode pesquisar na sua base de dados, mas não pode fugir muito da proposta do texto que foi passado anteriormente e está contornado por ###. Caso a pergunta não seja direcionada sobre o projeto de Matricula Online da cidade do recife, responda o seguinte: 'Eu não posso lhe ajudar'. Para contextualizar: Você é um chatbot de um aplicativo que serve para retirar dúvidas de pessoas sobre o sistema de matricula da cidade do recife. Seja neutro na hora de falar sobre algum politico que está em exercício atualmente. Resuma para que não seja tão verboso a resposta.");
       var response = await chat.sendMessage(content);
-      print("FOI");
       return response.text;
     } catch (e) {
-      print(e);
-      print("NAo foi");
       return "Algo deu errado na resposta, tente novamente!";
     }
   }
